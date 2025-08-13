@@ -20,6 +20,9 @@ public class EntrepriseServiceImpl implements EntrepriseService {
     public List<Entreprise> findAll() {
         List<Entreprise> list = new ArrayList<Entreprise>();
 
-        entrepriseRepository.findAll();
+        entrepriseRepository.findAll().forEach(list::add); //pour chaque entreprise trouver dans le findAll, je vais l'ajouter à la liste
+
+        return list;
+
     }
 }
