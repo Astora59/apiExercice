@@ -45,4 +45,12 @@ public class EntrepriseServiceImpl implements EntrepriseService {
         return entrepriseRepository.save(entreprise).getId();
 
     }
+
+    @Override
+    public void update(UUID id, Entreprise entreprise) {
+
+        entreprise.setId(id);
+        entrepriseRepository.save(entreprise);
+
+    }
 }

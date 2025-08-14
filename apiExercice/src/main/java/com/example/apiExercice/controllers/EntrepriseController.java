@@ -43,6 +43,13 @@ public class EntrepriseController {
 
     }
 
+    @PutMapping("/{id}")
+    public void update(@PathVariable UUID id, @RequestBody Entreprise entreprise) {
 
+        if(entrepriseService.findById(id) == null) {
+            throw new ResourceNotFoundException();
+        }
+        entrepriseService.update(id, entreprise);
+    }
 
 }

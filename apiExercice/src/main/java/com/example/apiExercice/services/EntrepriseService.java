@@ -8,11 +8,12 @@ import java.util.UUID;
 //va servir à lister les fonctions disponibles
 public interface EntrepriseService {
 
-    public List<Entreprise> findAll(); //on ne met pas le contenu de la fonction, c'est pas là qu'on la met
+    List<Entreprise> findAll(); //on ne met pas le contenu de la fonction, c'est pas là qu'on la met
 
-    public Entreprise findById(UUID id);
+    Entreprise findById(UUID id);
 
-    public UUID create(Entreprise entreprise);
+    UUID create(Entreprise entreprise);
 
 
+    void update(UUID id, Entreprise entreprise);
 }
