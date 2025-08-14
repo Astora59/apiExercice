@@ -1,5 +1,6 @@
 package com.example.apiExercice.controllers;
 
+import com.example.apiExercice.exceptions.ResourceNotFoundException;
 import com.example.apiExercice.models.Entreprise;
 import com.example.apiExercice.services.EntrepriseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,12 @@ public class EntrepriseController {
     @GetMapping("/{id}")
     public Entreprise findById(@PathVariable UUID id)  {
 
-        Entreprise entreprise = entrepriseService.findById(id);
-        return entreprise;
+        Entreprise response = entrepriseService.findById(id);
 
+        //si l'entreprise n'est pas trouvé on renvoie une exception
+        if(response == null) {
+            throw new ResourceNotFoundException();
+        }
+        return response;
     }
 }
