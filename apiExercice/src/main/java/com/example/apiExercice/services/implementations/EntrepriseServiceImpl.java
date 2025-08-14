@@ -38,4 +38,11 @@ public class EntrepriseServiceImpl implements EntrepriseService {
         //si je ne trouve pas l'entreprise
         return null;
     }
+
+    @Override
+    public UUID create(Entreprise entreprise) {
+
+        return entrepriseRepository.save(entreprise).getId();
+
+    }
 }

@@ -4,10 +4,8 @@ import com.example.apiExercice.exceptions.ResourceNotFoundException;
 import com.example.apiExercice.models.Entreprise;
 import com.example.apiExercice.services.EntrepriseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,4 +34,15 @@ public class EntrepriseController {
         }
         return response;
     }
+
+    @PostMapping //pour dire qu'il y aura un POST ici
+    @ResponseStatus(code = HttpStatus.CREATED) //pour qu'on ait un code 201 et pas 200, on fait ça
+    public UUID Create(@RequestBody Entreprise entreprise) {
+
+        return entrepriseService.create(entreprise);
+
+    }
+
+
+
 }

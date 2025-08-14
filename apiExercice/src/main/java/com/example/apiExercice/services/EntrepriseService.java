@@ -11,4 +11,8 @@ public interface EntrepriseService {
     public List<Entreprise> findAll(); //on ne met pas le contenu de la fonction, c'est pas là qu'on la met
 
     public Entreprise findById(UUID id);
+
+    public UUID create(Entreprise entreprise);
+
+
 }
