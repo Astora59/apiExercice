@@ -25,4 +25,17 @@ public class EntrepriseServiceImpl implements EntrepriseService {
         return list;
 
     }
+
+    @Override
+    public Entreprise findById(UUID id) {
+
+        //si je trouve l'entreprise
+        if(entrepriseRepository.findById(id).isPresent()) {
+
+            return entrepriseRepository.findById(id).get();
+
+        }
+        //si je ne trouve pas l'entreprise
+        return null;
+    }
 }

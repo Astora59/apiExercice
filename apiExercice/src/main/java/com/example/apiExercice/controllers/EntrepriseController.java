@@ -4,6 +4,7 @@ import com.example.apiExercice.models.Entreprise;
 import com.example.apiExercice.services.EntrepriseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,12 @@ public class EntrepriseController {
     public List<Entreprise> findAll() {
 
         return entrepriseService.findAll(); //traduction : je vais dans l'impl et je fais appel à ma méthode findAll
+    }
+    @GetMapping("/{id}")
+    public Entreprise findById(@PathVariable UUID id)  {
+
+        Entreprise entreprise = entrepriseService.findById(id);
+        return entreprise;
+
     }
 }
