@@ -66,4 +66,15 @@ public class EntrepriseController {
 
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable UUID id) {
+
+        if(entrepriseService.findById(id) == null) {
+            throw new ResourceNotFoundException();
+        }
+
+        entrepriseService.deleteById(id);
+
+    }
 }

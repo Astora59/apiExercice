@@ -80,4 +80,13 @@ public class EntrepriseServiceImpl implements EntrepriseService {
 
         entrepriseRepository.save(entrepriseToUpdate);
     }
+
+    @Override
+    public void deleteById(UUID id) {
+
+        entrepriseRepository.deleteById(id);
+
+    }
+
+
 }
