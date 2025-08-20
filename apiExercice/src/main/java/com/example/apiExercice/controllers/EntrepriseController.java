@@ -1,6 +1,6 @@
 package com.example.apiExercice.controllers;
 
-import com.example.apiExercice.exceptions.ResourceNotFoundException;
+
 import com.example.apiExercice.models.Entreprise;
 import com.example.apiExercice.services.EntrepriseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +27,8 @@ public class EntrepriseController {
     @GetMapping("/{id}")
     public Entreprise findById(@PathVariable UUID id)  {
 
-        Entreprise response = entrepriseService.findById(id);
+        return entrepriseService.findById(id);
 
-        //si l'entreprise n'est pas trouvé on renvoie une exception
-        if(response == null) {
-            throw new ResourceNotFoundException();
-        }
-        return response;
     }
 
     @PostMapping //pour dire qu'il y aura un POST ici
@@ -48,9 +43,9 @@ public class EntrepriseController {
     @ResponseStatus(code = HttpStatus.OK) //pour qu'on ait un code 201 et pas 200, on fait ça
     public void update(@PathVariable UUID id, @RequestBody Entreprise entreprise) {
 
-        if(entrepriseService.findById(id) == null) {
-            throw new ResourceNotFoundException();
-        }
+        //controle l'existencd de mon entité
+        entrepriseService.findById(id);
+
         entrepriseService.update(id, entreprise);
     }
 
@@ -58,9 +53,9 @@ public class EntrepriseController {
     @ResponseStatus(code = HttpStatus.OK) //pour qu'on ait un code 201 et pas 200, on fait ça
     public void partialUpdate(@PathVariable UUID id, @RequestBody Map<String, Object> updates) {
 
-        if(entrepriseService.findById(id) == null) {
-            throw new ResourceNotFoundException();
-        }
+
+        entrepriseService.findById(id);
+
         entrepriseService.partialUpdate(id, updates);
 
 
@@ -70,9 +65,7 @@ public class EntrepriseController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable UUID id) {
 
-        if(entrepriseService.findById(id) == null) {
-            throw new ResourceNotFoundException();
-        }
+        entrepriseService.findById(id);
 
         entrepriseService.deleteById(id);
 

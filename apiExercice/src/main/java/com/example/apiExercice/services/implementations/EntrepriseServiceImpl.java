@@ -1,5 +1,6 @@
 package com.example.apiExercice.services.implementations;
 
+import com.example.apiExercice.exceptions.ResourceNotFoundException;
 import com.example.apiExercice.models.Entreprise;
 import com.example.apiExercice.repositories.EntrepriseRepository;
 import com.example.apiExercice.services.EntrepriseService;
@@ -30,14 +31,7 @@ public class EntrepriseServiceImpl implements EntrepriseService {
     @Override
     public Entreprise findById(UUID id) {
 
-        //si je trouve l'entreprise
-        if(entrepriseRepository.findById(id).isPresent()) {
-
-            return entrepriseRepository.findById(id).get();
-
-        }
-        //si je ne trouve pas l'entreprise
-        return null;
+        return entrepriseRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
