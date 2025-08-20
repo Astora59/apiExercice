@@ -1,21 +1,25 @@
 package com.example.apiExercice.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Table(name="entreprise")
 @Entity
 public class Entreprise {
+
+    @Id
+    @GeneratedValue
     private UUID id;
     private String name;
     private String adresse;
 
-    @Id
-    @GeneratedValue
+    @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
+    private Set<Jeu> jeux = new HashSet<Jeu>();
+
+
     public UUID getId() {
         return id;
     }
@@ -38,5 +42,13 @@ public class Entreprise {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public Set<Jeu> getJeux() {
+        return jeux;
+    }
+
+    public void setJeux(Set<Jeu> jeux) {
+        this.jeux = jeux;
     }
 }
