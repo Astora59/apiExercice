@@ -3,6 +3,7 @@ package com.example.apiExercice.services;
 import com.example.apiExercice.models.Entreprise;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 //va servir à lister les fonctions disponibles
@@ -16,4 +17,6 @@ public interface EntrepriseService {
 
 
     void update(UUID id, Entreprise entreprise);
+
+    void partialUpdate(UUID id, Map<String, Object> updates);
 }

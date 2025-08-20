@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController //@RestController : permet d’indiquer à Spring qu’on est sur un controller REST (et qui va avoir des verbes HTTP)
@@ -44,12 +45,25 @@ public class EntrepriseController {
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK) //pour qu'on ait un code 201 et pas 200, on fait ça
     public void update(@PathVariable UUID id, @RequestBody Entreprise entreprise) {
 
         if(entrepriseService.findById(id) == null) {
             throw new ResourceNotFoundException();
         }
         entrepriseService.update(id, entreprise);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK) //pour qu'on ait un code 201 et pas 200, on fait ça
+    public void partialUpdate(@PathVariable UUID id, @RequestBody Map<String, Object> updates) {
+
+        if(entrepriseService.findById(id) == null) {
+            throw new ResourceNotFoundException();
+        }
+        entrepriseService.partialUpdate(id, updates);
+
+
     }
 
 }

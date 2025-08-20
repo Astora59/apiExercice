@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service //indique que cette classe est un service qu'on peut injecter dans un autre composant
@@ -52,5 +53,31 @@ public class EntrepriseServiceImpl implements EntrepriseService {
         entreprise.setId(id);
         entrepriseRepository.save(entreprise);
 
+    }
+
+    @Override
+    public void partialUpdate(UUID id, Map<String, Object> updates) {
+
+        Entreprise entrepriseToUpdate = entrepriseRepository.findById(id).get();
+
+        //on boucle sur tous les champs
+        for(String key : updates.keySet()) {
+
+            switch(key) {
+                case "name" : {
+                    entrepriseToUpdate.setName((String) updates.get(key));
+                    break;
+                }
+
+                case "adresse" : {
+                    entrepriseToUpdate.setAdresse((String) updates.get(key));
+                    break;
+                }
+            }
+
+
+        }
+
+        entrepriseRepository.save(entrepriseToUpdate);
     }
 }
