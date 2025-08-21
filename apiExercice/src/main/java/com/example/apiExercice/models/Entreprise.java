@@ -1,6 +1,7 @@
 package com.example.apiExercice.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -14,7 +15,12 @@ public class Entreprise {
     @Id
     @GeneratedValue
     private UUID id;
+
+
+    @Schema(description = "Nom de l'entreprise", example = "Google")
     private String name;
+
+    @Schema(description = "Adresse de l'entreprise", example = "44 rue du Colonel Sanders")
     private String adresse;
 
     @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
