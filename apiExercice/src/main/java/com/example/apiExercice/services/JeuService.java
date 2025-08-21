@@ -18,4 +18,8 @@ public interface JeuService {
 
 
     Set<Jeu> findAllOfEntreprise(UUID idEntreprise);
+
+    UUID create(UUID idEntreprise, Jeu jeu);
+
+    void update(UUID id, Jeu jeu);
 }

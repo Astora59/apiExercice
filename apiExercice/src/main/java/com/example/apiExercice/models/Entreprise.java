@@ -1,5 +1,6 @@
 package com.example.apiExercice.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -17,6 +18,7 @@ public class Entreprise {
     private String adresse;
 
     @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
+    @JsonManagedReference //tu as une liste de jeux que tu peux afficher, mais attention il y a un JsonBackReference donc n'affiche pas les entreprises dans les jeux
     private Set<Jeu> jeux = new HashSet<Jeu>();
 
 

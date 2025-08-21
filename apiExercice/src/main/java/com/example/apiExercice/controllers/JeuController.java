@@ -42,6 +42,27 @@ public class JeuController {
 
     }
 
+    @PostMapping("/entreprises/{idEntreprise}/jeux")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public UUID create(@PathVariable UUID idEntreprise, @RequestBody Jeu jeu) {
+
+        //je m'assure que l'id existe bien
+        entrepriseService.findById(idEntreprise);
+
+        return jeuService.create(idEntreprise, jeu);
+
+    }
+
+    @PutMapping("/jeux/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public void update(@PathVariable UUID id, @RequestBody Jeu jeu) {
+
+        //je m'assure que le jeu existe
+        jeuService.findById(id);
+
+        jeuService.update(id, jeu);
+
+    }
 
 
 }

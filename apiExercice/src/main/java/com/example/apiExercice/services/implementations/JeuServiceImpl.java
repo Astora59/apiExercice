@@ -23,6 +23,11 @@ public class JeuServiceImpl implements JeuService {
     private EntrepriseRepository entrepriseRepository;
 
 
+    @Autowired
+    private EntrepriseService entrepriseService;
+
+
+
     @Override
     public Jeu findById(UUID id) {
 
@@ -33,6 +38,32 @@ public class JeuServiceImpl implements JeuService {
     public Set<Jeu> findAllOfEntreprise(UUID idEntreprise) {
 
         return entrepriseRepository.findById(idEntreprise).get().getJeux();
+
+    }
+
+    @Override
+    public UUID create(UUID idEntreprise, Jeu jeu) {
+
+
+        Entreprise entreprise = entrepriseRepository.findById(idEntreprise).get();
+        jeu.setEntreprise(entreprise);
+
+        jeuRepository.save(jeu);
+        return jeu.getId();
+
+
+    }
+
+    @Override
+    public void update(UUID id, Jeu jeu) {
+
+        //je relie le jeu avec son id
+        jeu.setId(id);
+        Entreprise entreprise = entrepriseService.findById(jeu.getEntrepriseId());
+        //j'associe le jeu avec son objet entreprise, pas son id
+        jeu.setEntreprise(entreprise);
+        //on va faire un update, et pas un insert
+        jeuRepository.save(jeu);
 
     }
 

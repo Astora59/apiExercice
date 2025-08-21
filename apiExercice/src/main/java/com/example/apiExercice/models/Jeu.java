@@ -1,6 +1,8 @@
 package com.example.apiExercice.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.context.annotation.EnableMBeanExport;
 
@@ -19,7 +21,14 @@ public class Jeu {
 
     @ManyToOne
     @JoinColumn(name = "entreprise_id") //dans jeu, quel sera la colonne en db qui comportera notre foreign key : id
+    @JsonBackReference //indiquer que la propriété associé fait partie d'un lien entre deux champs
+
     private Entreprise entreprise;
+
+
+    @Transient //spécifie que la propriété n'est pas persistante
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private UUID entrepriseId;
 
     public Jeu() {
 
@@ -61,6 +70,14 @@ public class Jeu {
 
     public void setEntreprise(Entreprise entreprise) {
         this.entreprise = entreprise;
+    }
+
+    public UUID getEntrepriseId() {
+        return entrepriseId;
+    }
+
+    public void setEntrepriseId(UUID entrepriseId) {
+        this.entrepriseId = entrepriseId;
     }
 }
 
