@@ -3,6 +3,7 @@ package com.example.apiExercice.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Table(name="entreprise")
 @Entity
+@Schema(description = "Représente une entreprise éditrice de jeux de société")
 public class Entreprise {
 
     @Id
@@ -18,6 +20,7 @@ public class Entreprise {
 
 
     @Schema(description = "Nom de l'entreprise", example = "Google")
+    @NotNull(message = "Le nom est obligatoire")
     private String name;
 
     @Schema(description = "Adresse de l'entreprise", example = "44 rue du Colonel Sanders")
