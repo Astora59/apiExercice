@@ -22,4 +22,6 @@ public interface JeuService {
     UUID create(UUID idEntreprise, Jeu jeu);
 
     void update(UUID id, Jeu jeu);
+
+    void deleteById(UUID id);
 }

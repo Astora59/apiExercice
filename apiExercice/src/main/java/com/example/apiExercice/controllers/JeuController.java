@@ -64,5 +64,17 @@ public class JeuController {
 
     }
 
+    @DeleteMapping("/jeux/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteById(UUID id) {
+
+        //je m'assure que le jeu existe
+        jeuService.findById(id);
+
+
+        jeuService.deleteById(id);
+
+    }
+
 
 }

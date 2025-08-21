@@ -67,5 +67,12 @@ public class JeuServiceImpl implements JeuService {
 
     }
 
+    @Override
+    public void deleteById(UUID id) {
+
+        jeuRepository.deleteById(id);
+
+    }
+
 
 }
