@@ -4,7 +4,6 @@ package com.example.apiExercice.services;
 
 import com.example.apiExercice.models.Jeu;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -24,4 +23,6 @@ public interface JeuService {
     void update(UUID id, Jeu jeu);
 
     void deleteById(UUID id);
+
+    void partialUpdate(UUID id, Map<String, Object> updates);
 }

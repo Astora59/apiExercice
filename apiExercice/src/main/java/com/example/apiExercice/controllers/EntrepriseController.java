@@ -43,7 +43,7 @@ public class EntrepriseController {
     @ResponseStatus(code = HttpStatus.OK) //pour qu'on ait un code 201 et pas 200, on fait ça
     public void update(@PathVariable UUID id, @RequestBody Entreprise entreprise) {
 
-        //controle l'existencd de mon entité
+        //controle l'existence de mon entité
         entrepriseService.findById(id);
 
         entrepriseService.update(id, entreprise);

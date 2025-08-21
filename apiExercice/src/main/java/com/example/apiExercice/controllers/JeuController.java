@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -66,13 +67,23 @@ public class JeuController {
 
     @DeleteMapping("/jeux/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteById(UUID id) {
+    public void deleteById(@PathVariable UUID id) {
 
         //je m'assure que le jeu existe
         jeuService.findById(id);
 
 
         jeuService.deleteById(id);
+
+    }
+
+    @PatchMapping("/jeux/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public void partialUpdate(@PathVariable UUID id, @RequestBody Map<String, Object> updates) {
+
+        jeuService.findById(id);
+
+        jeuService.partialUpdate(id, updates);
 
     }
 

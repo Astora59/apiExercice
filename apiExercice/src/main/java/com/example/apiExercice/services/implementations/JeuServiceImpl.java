@@ -10,6 +10,8 @@ import com.example.apiExercice.services.JeuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -71,6 +73,33 @@ public class JeuServiceImpl implements JeuService {
     public void deleteById(UUID id) {
 
         jeuRepository.deleteById(id);
+
+    }
+
+    @Override
+    public void partialUpdate(UUID id, Map<String, Object> updates) {
+
+        Jeu jeuToUpdate = jeuRepository.findById(id).get();
+
+        //on boucle sur tous les champs
+        for(String key : updates.keySet()) {
+
+            switch(key) {
+                case "name" : {
+                    jeuToUpdate.setName((String) updates.get(key));
+                    break;
+                }
+
+                case "price" : {
+                    jeuToUpdate.setPrice((BigDecimal) updates.get(key));
+                    break;
+                }
+            }
+
+
+        }
+
+
 
     }
 
